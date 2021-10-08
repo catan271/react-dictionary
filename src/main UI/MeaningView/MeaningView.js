@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { MeaningContext } from '../../context/Provider'
 
-const exampleRegex = /=([^+]+)\+ (.+)/
+const exampleRegex = /= ?([^+]+)\+ ?(.+)/
 
 function createLine(index, line, type) {
     return <div className={type} key={index}>{line}</div>

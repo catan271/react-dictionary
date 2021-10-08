@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 
 import Result from './Result'
+import { SetMeaningContext} from '../../context/Provider'
 
 export default function Search(props) {
     const [results, setResults] = useState([])
     const [activeIndex, setActiveIndex] = useState(0);
+    const setMeaning = useContext(SetMeaningContext)
 
     useEffect(() => {
         setResults([])
@@ -16,7 +18,7 @@ export default function Search(props) {
         if (!e.target.value.length) return setResults([])
         const searchRegex = new RegExp('^' + e.target.value, 'i')
         const searchResults = []
-        let max = 30
+        let max = 40
         for (let i = 0; i < props.dict.length; i++) {
             if (searchRegex.test(props.dict[i].word)) {
                 searchResults.push(props.dict[i])
@@ -29,6 +31,7 @@ export default function Search(props) {
 
     const clickWord = (index) => {
         setActiveIndex(index)
+        setMeaning(results[index])
     }
 
     return (
@@ -47,6 +50,7 @@ export default function Search(props) {
 
 export const SearchStyle = styled.div`
     height: 100%;
+    min-width: 360px;
     width: 360px;
     background-color: #F2F3F4;
     overflow-y: hidden;

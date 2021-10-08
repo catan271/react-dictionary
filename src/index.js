@@ -5,6 +5,7 @@ import './assets/fontawesome-free-5.15.3-web/css/all.min.css'
 
 import Sidebar from './sidebar/Sidebar'
 import SearchView from './main UI/SearchView/SearchView'
+import MeaningView from './main UI/MeaningView/MeaningView'
 import Provider from './context/Provider'
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
             <Provider>
                 <Sidebar/>
                 <SearchView/>
+                <MeaningView/>
             </Provider>
         </React.Fragment>
     )

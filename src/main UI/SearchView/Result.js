@@ -29,7 +29,7 @@ const ResultStyle = styled.div`
             font-weight: 500;
         }
         .pronunciation {
-            margin-left: auto;
+            margin-left: 50px;
         }
     }
 

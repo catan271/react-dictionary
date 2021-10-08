@@ -12,6 +12,16 @@ function createLine(index, line, type) {
 export default function MeaningView() {
     const word = useContext(MeaningContext)
 
+    const playAudioUS = () => {
+        let audio = document.getElementById('us-pronounce')
+        if (audio) audio.play()
+    }
+
+    const playAudioUK = () => {
+        let audio = document.getElementById('uk-pronounce')
+        if (audio) audio.play()
+    }
+
     return (
         <MeaningStyle>
             <div className="header">
@@ -23,8 +33,12 @@ export default function MeaningView() {
                     <div><span style={{fontSize: 40}}>{word.word || 'Catan Dictionary'}</span><span style={{marginLeft: 16}}>{word.pronunciation}</span></div>
                 </div>
                 <div className="right">
-                    <div>US <i className="fas fa-volume-up"></i></div>
-                    <div>UK <i className="fas fa-volume-up"></i></div>
+                    <div onClick={playAudioUS}>US <i className="fas fa-volume-up"></i>
+                        {(word.word && (/^[a-z]+$/i).test(word.word)) && <audio id="us-pronounce" src={`https://ssl.gstatic.com/dictionary/static/sounds/oxford/${word.word}--_us_1.mp3`}/>}
+                    </div>
+                    <div onClick={playAudioUK}>UK <i className="fas fa-volume-up"></i>
+                        {(word.word && (/^[a-z]+$/i).test(word.word)) && <audio id="uk-pronounce" src={`https://ssl.gstatic.com/dictionary/static/sounds/oxford/${word.word}--_gb_1.mp3`}/>}
+                    </div>
                 </div>
             </div> 
             <div className="content">
@@ -38,9 +52,9 @@ export default function MeaningView() {
                             return createLine(index, line.slice(1), "phrase")
                         case '=':
                             const example = exampleRegex.exec(line)
-                            if (example) return <React.Fragment>
+                            if (example) return <React.Fragment key={index}>
                                 {createLine(index, example[1], 'example')}
-                                {createLine(index + 0.5, example[2], 'example-meaning')}
+                                {createLine(-index, example[2], 'example-meaning')}
                             </React.Fragment>
                             else return createLine(index, line)
                         default:

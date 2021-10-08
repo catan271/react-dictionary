@@ -15,6 +15,7 @@ export default function Search(props) {
     }, [props.dict])
 
     const getResult = (e) => {
+        setActiveIndex(-1)
         if (!e.target.value.length) return setResults([])
         const searchRegex = new RegExp('^' + e.target.value, 'i')
         const searchResults = []
@@ -34,11 +35,18 @@ export default function Search(props) {
         setMeaning(results[index])
     }
 
+    const enterEvent = (e) => {
+        e.preventDefault()
+        if (results) clickWord(0)
+    }
+
     return (
         <SearchStyle id="search-view">
             <div className="search-header">
                 <div><i className={props.icon}></i> {props.header}</div>
-                <input type="text" onChange={getResult}></input>
+                <form onSubmit={enterEvent}>
+                    <input type="text" onChange={getResult} ></input>
+                </form>
             </div>
 
             <div className="results">
@@ -68,6 +76,10 @@ export const SearchStyle = styled.div`
         padding: 10px;
         gap: 8px;
         font-size: 18px;
+
+        form {
+            width: 100%;
+        }
 
         input {
             height: 36px;

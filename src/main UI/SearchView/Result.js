@@ -26,7 +26,7 @@ const ResultStyle = styled.div`
     .line1 {
         display: flex;
         .word {
-            font-weight: 500;
+            font-weight: 600;
         }
         .pronunciation {
             margin-left: auto;

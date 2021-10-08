@@ -1,17 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import './assets/fontawesome-free-5.15.3-web/css/all.min.css'
+
+import Sidebar from './sidebar/Sidebar'
+import SearchView from './main UI/SearchView/SearchView'
+import Provider from './context/Provider'
+
+function App() {
+    return (
+        <React.Fragment>
+            <Provider>
+                <Sidebar/>
+                <SearchView/>
+            </Provider>
+        </React.Fragment>
+    )
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    <App/>,
+    document.getElementById('root')
+)

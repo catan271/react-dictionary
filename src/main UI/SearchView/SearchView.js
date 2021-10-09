@@ -12,11 +12,11 @@ export default function SearchView() {
     switch (type) {
         case 'vietnamese':
             return (
-                <Search dict={vietnamese} icon={'fas fa-search'} header={' nhập từ cần tra'}/>
+                <Search dict={vietnamese} lang={type} icon={'fas fa-search'} header={' nhập từ cần tra'}/>
             )
         default:
             return(
-                <Search dict={english} icon={'fas fa-search'} header={' nhập từ cần tra'}/>
+                <Search dict={english} lang={type} icon={'fas fa-search'} header={' nhập từ cần tra'}/>
             )
     }
 }

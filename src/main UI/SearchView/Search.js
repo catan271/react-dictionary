@@ -32,7 +32,7 @@ export default function Search(props) {
 
     const clickWord = (index) => {
         setActiveIndex(index)
-        setMeaning(results[index])
+        setMeaning({...results[index], lang: props.lang})
     }
 
     const enterEvent = (e) => {

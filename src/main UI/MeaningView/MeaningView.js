@@ -1,24 +1,38 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
+import * as GoogleTTS from 'google-tts-api'
 
 import { MeaningContext } from '../../context/Provider'
 
 const exampleRegex = /= ?([^+]+)\+ ?(.+)/
 
-function createLine(index, line, type) {
+const createLine = (index, line, type) => {
     return <div className={type} key={index}>{line}</div>
+}
+
+const generateSrc = (word, lang) => {
+    return GoogleTTS.getAudioUrl(word, {
+        lang,
+        slow: false,
+        host: 'https://translate.google.com'
+    })
 }
 
 export default function MeaningView() {
     const word = useContext(MeaningContext)
 
     const playAudioUS = () => {
-        let audio = document.getElementById('us-pronounce')
+        const audio = document.getElementById("us-pronounce")
         if (audio) audio.play()
     }
 
     const playAudioUK = () => {
-        let audio = document.getElementById('uk-pronounce')
+        const audio = document.getElementById("uk-pronounce")
+        if (audio) audio.play()
+    }
+
+    const playAudioVI = () => {
+        const audio = document.getElementById("vi-pronounce")
         if (audio) audio.play()
     }
 
@@ -32,14 +46,19 @@ export default function MeaningView() {
                     </div>
                     <div><span style={{fontSize: 40}}>{word.word || 'Catan Dictionary'}</span><span style={{marginLeft: 16}}>{word.pronunciation}</span></div>
                 </div>
-                <div className="right">
+                {word.lang === 'english' && <div className="right">
                     <div className="pronounce us" onClick={playAudioUS}>US <i className="fas fa-volume-up"></i>
-                        {(word.word && (/^[a-z]+$/i).test(word.word)) && <audio id="us-pronounce" src={`https://ssl.gstatic.com/dictionary/static/sounds/oxford/${word.word}--_us_1.mp3`}/>}
+                        <audio id="us-pronounce" src={generateSrc(word.word, 'en-US')} type="audio/mpeg"/>
                     </div>
                     <div className="pronounce uk" onClick={playAudioUK}>UK <i className="fas fa-volume-up"></i>
-                        {(word.word && (/^[a-z]+$/i).test(word.word)) && <audio id="uk-pronounce" src={`https://ssl.gstatic.com/dictionary/static/sounds/oxford/${word.word}--_gb_1.mp3`}/>}
+                        <audio id="uk-pronounce" src={generateSrc(word.word, 'en-UK')}/>
                     </div>
-                </div>
+                </div>}
+                {word.lang === 'vietnamese' && <div className="right">
+                    <div className="pronounce vi" onClick={playAudioVI}>VI <i className="fas fa-volume-up"></i>
+                        <audio id="vi-pronounce" src={generateSrc(word.word, 'vi-VN')}/>
+                    </div>
+                </div>}
             </div> 
             <div className="content">
                 {word.meaning?.map((line, index) => {
@@ -98,6 +117,9 @@ const MeaningStyle = styled.div`
             }
             .pronounce.uk:hover{
                 color: #0C7BCC;
+            }
+            .pronounce.vi:hover{
+                color: #F7F700;
             }
         }
     }

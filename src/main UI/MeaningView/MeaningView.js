@@ -33,10 +33,10 @@ export default function MeaningView() {
                     <div><span style={{fontSize: 40}}>{word.word || 'Catan Dictionary'}</span><span style={{marginLeft: 16}}>{word.pronunciation}</span></div>
                 </div>
                 <div className="right">
-                    <div onClick={playAudioUS}>US <i className="fas fa-volume-up"></i>
+                    <div className="pronounce us" onClick={playAudioUS}>US <i className="fas fa-volume-up"></i>
                         {(word.word && (/^[a-z]+$/i).test(word.word)) && <audio id="us-pronounce" src={`https://ssl.gstatic.com/dictionary/static/sounds/oxford/${word.word}--_us_1.mp3`}/>}
                     </div>
-                    <div onClick={playAudioUK}>UK <i className="fas fa-volume-up"></i>
+                    <div className="pronounce uk" onClick={playAudioUK}>UK <i className="fas fa-volume-up"></i>
                         {(word.word && (/^[a-z]+$/i).test(word.word)) && <audio id="uk-pronounce" src={`https://ssl.gstatic.com/dictionary/static/sounds/oxford/${word.word}--_gb_1.mp3`}/>}
                     </div>
                 </div>
@@ -86,6 +86,19 @@ const MeaningStyle = styled.div`
             flex-direction: column;
             gap: 4px;
             justify-content: flex-end;
+        }
+
+        .right {
+            gap: 8px;
+            .pronounce:hover {
+                cursor: pointer;
+            }
+            .pronounce.us:hover{
+                color: #B32134;
+            }
+            .pronounce.uk:hover{
+                color: #0C7BCC;
+            }
         }
     }
 

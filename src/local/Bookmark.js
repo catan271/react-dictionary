@@ -5,5 +5,6 @@ export function saveWord(word) {
 }
 
 export function getBookmark() {
-    return JSON.parse(window.localStorage.getItem('bookmark')) || []
+    const bookmark = JSON.parse(window.localStorage.getItem('bookmark')) || []
+    return bookmark.filter(word => word.word)
 }

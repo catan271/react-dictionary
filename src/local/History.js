@@ -5,5 +5,6 @@ export function saveWordHistory(word) {
 }
 
 export function getHistory() {
-    return JSON.parse(window.localStorage.getItem('history')) || []
+    const history = JSON.parse(window.localStorage.getItem('history')) || []
+    return history.filter(word => word.word)
 }

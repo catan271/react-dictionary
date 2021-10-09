@@ -22,11 +22,11 @@ export default function SearchView() {
             )
         case 'vietnamese':
             return (
-                <Search dict={vietnamese} init={getHistory} lang={type} icon={'fas fa-search'} header={' Nhập từ cần tra'}/>
+                <Search dict={vietnamese} lang={type} icon={'fas fa-search'} header={' Nhập từ cần tra'}/>
             )
         default:
             return(
-                <Search dict={english} init={getHistory} lang={type} icon={'fas fa-search'} header={' Nhập từ cần tra'}/>
+                <Search dict={english} lang={type} icon={'fas fa-search'} header={' Nhập từ cần tra'}/>
             )
     }
 }

@@ -1,8 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import * as GoogleTTS from 'google-tts-api'
 
 import { MeaningContext } from '../../context/Provider'
+import { saveWord } from '../../local/Bookmark'
+import { saveWordHistory } from '../../local/History'
 
 const exampleRegex = /= ?([^+]+)\+ ?(.+)/
 
@@ -21,6 +23,10 @@ const generateSrc = (word, lang) => {
 export default function MeaningView() {
     const word = useContext(MeaningContext)
 
+    useEffect(() => {
+        saveWordHistory(word)
+    }, [word])
+
     const playAudioUS = () => {
         const audio = document.getElementById("us-pronounce")
         if (audio) audio.play()
@@ -36,13 +42,17 @@ export default function MeaningView() {
         if (audio) audio.play()
     }
 
+    const saveBookmark = () => {
+        if (word.word) saveWord(word)
+    }
+
     return (
         <MeaningStyle>
             <div className="header">
                 <div className="left">
                     <div style={{display: 'flex'}}>
                         <i className="fas fa-edit"></i>
-                        <i className="fas fa-bookmark" style={{marginLeft: 16}}></i>
+                        <i onClick={saveBookmark} className="fas fa-bookmark" style={{marginLeft: 16}}></i>
                     </div>
                     <div><span style={{fontSize: 40}}>{word.word || 'Catan Dictionary'}</span><span style={{marginLeft: 16}}>{word.pronunciation}</span></div>
                 </div>

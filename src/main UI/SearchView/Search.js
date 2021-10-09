@@ -12,7 +12,8 @@ export default function Search(props) {
     useEffect(() => {
         setResults([])
         setActiveIndex(-1)
-    }, [props.dict])
+        if (props.init) setResults(props.init())
+    }, [props])
 
     const getResult = (e) => {
         setActiveIndex(-1)

@@ -24,7 +24,7 @@ export default function MeaningView() {
     const word = useContext(MeaningContext)
 
     useEffect(() => {
-        saveWordHistory(word)
+        if (word.word) saveWordHistory(word)
     }, [word])
 
     const playAudioUS = () => {

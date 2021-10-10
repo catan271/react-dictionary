@@ -2,6 +2,7 @@ import React,{ useState, useContext } from 'react'
 import styled from 'styled-components'
 
 import { SetTypeContext } from '../context/Provider';
+import { handleAbout } from './About';
 
 export default function Sidebar() {
     const [index, setIndex] = useState(0);
@@ -49,7 +50,7 @@ export default function Sidebar() {
                 <i className="fa fa-2x fa-bookmark"></i>
                 <span className="tooltip">Từ đã đánh dấu</span>
             </div>
-            <div className="tab-item" style={{marginTop: 'auto'}}>
+            <div onClick={handleAbout} className="tab-item" style={{marginTop: 'auto'}}>
                 <i className="fas fa-2x fa-info-circle"></i>
             </div>
         </SidebarStyle>

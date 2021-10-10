@@ -17,8 +17,8 @@ export default function Search(props) {
 
     const getResult = (e) => {
         setActiveIndex(-1)
-        if (!e.target.value.length) return setResults([])
-        const searchRegex = new RegExp('^' + e.target.value, 'i')
+        if (!e.target.value.trim().length) return setResults([])
+        const searchRegex = new RegExp('^' + e.target.value.trim(), 'i')
         const searchResults = []
         let max = 40
         for (let i = 0; i < props.dict.length; i++) {

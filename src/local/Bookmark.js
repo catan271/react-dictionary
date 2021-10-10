@@ -12,6 +12,5 @@ export function saveWord(word) {
 export function deleteBookmark(word) {
     const bookmark = getBookmark()
     const newBookmark = bookmark.filter(each => each.index !== word.index || each.lang !== word.lang)
-    console.log(newBookmark)
     window.localStorage.setItem('bookmark', JSON.stringify(newBookmark))    
 }

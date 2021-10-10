@@ -39,7 +39,7 @@ export default function Search(props) {
 
     const enterEvent = (e) => {
         e.preventDefault()
-        if (results) clickWord(0)
+        if (results.length) clickWord(0)
     }
 
     return (

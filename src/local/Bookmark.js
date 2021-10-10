@@ -5,7 +5,7 @@ export function getBookmark() {
 
 export function saveWord(word) {
     const bookmark = getBookmark()
-    const newBookmark = [word, ...bookmark.filter(each => each.index !== word.index || each.lang !== word.lang)]
+    const newBookmark = [word, ...bookmark.filter(each => each.index !== word.index || each.lang !== word.lang)].slice(0, 5000)
     window.localStorage.setItem('bookmark', JSON.stringify(newBookmark))
 }
 

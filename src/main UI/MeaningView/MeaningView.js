@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import * as GoogleTTS from 'google-tts-api'
 
 import { MeaningContext } from '../../context/Provider'
-import { saveWord } from '../../local/Bookmark'
+import { saveWord, deleteBookmark, getBookmark } from '../../local/Bookmark'
 import { saveWordHistory } from '../../local/History'
 
 const exampleRegex = /= ?([^+]+)\+ ?(.+)/
@@ -22,9 +22,13 @@ const generateSrc = (word, lang) => {
 
 export default function MeaningView() {
     const word = useContext(MeaningContext)
+    const [saved, setSaved] = useState(false)
 
     useEffect(() => {
         if (word.word) saveWordHistory(word)
+        if (getBookmark()) {
+            setSaved(getBookmark().some(each => each.index === word.index && each.lang === word.lang)? true : false)
+        }
     }, [word])
 
     const playAudioUS = () => {
@@ -42,8 +46,16 @@ export default function MeaningView() {
         if (audio) audio.play()
     }
 
-    const saveBookmark = () => {
-        if (word.word) saveWord(word)
+    const handleBookmark = () => {
+        if (word.index) {
+            if (saved) {
+                deleteBookmark(word)
+                setSaved(false)
+            } else {
+                saveWord(word)
+                setSaved(true)
+            }
+        }
     }
 
     return (
@@ -51,8 +63,8 @@ export default function MeaningView() {
             <div className="header">
                 <div className="left">
                     <div style={{display: 'flex'}}>
-                        <i className="fas fa-edit"></i>
-                        <i onClick={saveBookmark} className="fas fa-bookmark" style={{marginLeft: 16}}></i>
+                        <i className="fas fa-edit" style={{marginRight: 16}}></i>
+                        <i onClick={handleBookmark} className={`${saved? 'fas' : 'far'} fa-bookmark`}></i>
                     </div>
                     <div><span style={{fontSize: 40}}>{word.word || 'Catan Dictionary'}</span><span style={{marginLeft: 16}}>{word.pronunciation}</span></div>
                 </div>

@@ -91,7 +91,7 @@ const SidebarStyle = styled.div`
         width: 150px;
         height: 36px;
         line-height: 36px;
-        background-color: #18A0FB;
+        background-color: #0d83f2;
         color: #fff;
         text-align: center;
         border-radius: 4px;
@@ -109,7 +109,7 @@ const SidebarStyle = styled.div`
         margin-top: -5px;
         border-width: 5px;
         border-style: solid;
-        border-color: transparent #43B0F9 transparent transparent;
+        border-color: transparent #0d83f2 transparent transparent;
     }
 
     .tab-item:hover .tooltip {

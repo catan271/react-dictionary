@@ -23,7 +23,8 @@ export default function Search(props) {
         let max = 40
         for (let i = 0; i < props.dict.length; i++) {
             if (searchRegex.test(props.dict[i].word)) {
-                searchResults.push(props.dict[i])
+                if (props.lang) searchResults.push({...props.dict[i], index: i, lang: props.lang})
+                else searchResults.push(props.dict[i])
                 max--
                 if (!max) break
             }
@@ -33,7 +34,7 @@ export default function Search(props) {
 
     const clickWord = (index) => {
         setActiveIndex(index)
-        setMeaning({...results[index], lang: props.lang})
+        setMeaning(results[index])
     }
 
     const enterEvent = (e) => {

@@ -40,6 +40,7 @@ export default function SentenceTranslate(props) {
 
     const translate = () => {        
         const source = sourceText.current.value
+        if (source.length === 0) return 
         sourceAudio = new Audio(GoogleTTS.getAudioUrl(source, {
             lang: languages[0].api,
             slow: false,
@@ -91,9 +92,10 @@ export default function SentenceTranslate(props) {
                 <div className="language">{languages[1].display}</div>
             </div>
             <div className="translate">
-                <form className="source">
+                <form className="source" onSubmit={(e) => e.preventDefault()}>
                     <textarea type="text" ref={sourceText} onChange={handleInput} onKeyDown={preventEnter}/>
                     <i className="speak fas fa-2x fa-volume-up" onClick={playSourceAudio}></i>
+                    <button onClick={translate}>Dịch</button>
                 </form>
                 <div className="target">
                     <div className="text" ref={targetText}></div>                    
@@ -130,6 +132,7 @@ const SentenceTranslateStyle = styled.div`
         .source {
             height: 50%;
             background-color: #F2F3F4;
+
             textarea {
                 height: 80%;
                 resize: none;
@@ -137,6 +140,21 @@ const SentenceTranslateStyle = styled.div`
                 width: 100%;
                 background-color: transparent;
                 padding: 24px;
+            }
+
+            button {
+                position: absolute;
+                right: 40px;
+                height: 32px;
+                width: 64px;
+                border-radius: 4px;
+                background-color: #0d83f2;
+                font-size: 20px;
+                color: white;
+            }
+            button:hover {
+                cursor: pointer;
+                opacity: 0.9;
             }
         }
 

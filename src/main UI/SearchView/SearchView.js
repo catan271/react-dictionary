@@ -1,16 +1,13 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
 import english from '../../assets/json/english.json'
 import vietnamese from '../../assets/json/vietnamese.json'
 import Search from './Search'
 
-import { TypeContext } from '../../context/Provider'
 import { getBookmark } from '../../local/Bookmark'
 import { getHistory } from '../../local/History'
 
-export default function SearchView() {
-    const type = useContext(TypeContext)
-
+export default function SearchView({type}) {
     switch (type) {
         case 'history':
             return(

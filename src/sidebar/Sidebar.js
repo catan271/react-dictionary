@@ -50,6 +50,16 @@ export default function Sidebar() {
                 <i className="fa fa-2x fa-bookmark"></i>
                 <span className="tooltip">Từ đã đánh dấu</span>
             </div>
+            <div 
+                className={"tab-item" + (index === 4? ' selected' : '')} 
+                onClick={() => {
+                    setIndex(4)
+                    setType('sentence')
+                }}
+            >
+                <i className="fa fa-2x fa-language"></i>
+                <span className="tooltip">Dịch câu</span>
+            </div>
             <div onClick={handleAbout} className="tab-item" style={{marginTop: 'auto'}}>
                 <i className="fas fa-2x fa-info-circle"></i>
             </div>

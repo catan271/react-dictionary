@@ -7,6 +7,7 @@ import Sidebar from './sidebar/Sidebar'
 import MainContent from './main UI/MainContent'
 import About from './sidebar/About'
 import Provider from './context/Provider'
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 function App() {
     return (
@@ -24,3 +25,6 @@ ReactDOM.render(
     <App/>,
     document.getElementById('root')
 )
+
+
+serviceWorkerRegistration.register();
